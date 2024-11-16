@@ -103,6 +103,35 @@
             cursor: pointer;
         }
 
+        /* Cost Calculator Section */
+        .calculator input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .calculator button {
+            width: 100%;
+            padding: 10px;
+            background: #3a9d23;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .calculator button:hover {
+            background: #2e8220;
+        }
+
+        .results {
+            margin-top: 20px;
+            text-align: center;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -126,6 +155,7 @@
         <a href="#features">Features</a>
         <a href="#specs">Specifications</a>
         <a href="#connectivity">Connectivity</a>
+        <a href="#calculator">Cost Calculator</a>
         <a href="#contact">Contact</a>
     </nav>
 
@@ -166,7 +196,7 @@
             </div>
             <div class="spec-item">
                 <h3>Battery Capacity</h3>
-                <p>660 Whr</p>
+                <p>550 Whr</p>
             </div>
             <div class="spec-item">
                 <h3>Weight Capacity</h3>
@@ -198,24 +228,52 @@
         </div>
     </section>
 
-    <!-- Call to Action Section -->
-    <section class="cta">
-        <h2>Ready to Ride?</h2>
-        <p>Join the green revolution and make Scootico your daily ride. Eco-friendly, efficient, and connected – 
-           Scootico has everything you need for a smarter, greener commute.</p>
-        <a href="mailto:sreejithsivan2003191@gmail.com?subject=Order%20Inquiry%20for%20Scootico&body=Hello%20Sreejith%2C%0A%0AI%20am%20interested%20in%20ordering%20the%20Scootico%20electric%20scooter.%20Please%20provide%20more%20details%20about%20the%20ordering%20process.%0A%0AThank%20you.%0A%0ARegards%2C%0A[Your%20Name]"
-           style="text-decoration: none;">
-           <button>Order Now</button>
-        </a> 
+    <!-- Cost Calculator Section -->
+    <section id="calculator">
+        <h2 class="section-title">Scootico Cost Calculator</h2>
+        <p>Use this calculator to compare the costs of a petrol scooter with Scootico and see your savings!</p>
+
+        <div class="calculator">
+            <label for="distance">Daily Distance (km):</label>
+            <input type="number" id="distance" placeholder="Enter daily distance in km">
+
+            <label for="fuel-cost">Fuel Cost (per liter):</label>
+            <input type="number" id="fuel-cost" placeholder="Enter fuel cost per liter">
+
+            <label for="petrol-mileage">Petrol Scooter Mileage (km/liter):</label>
+            <input type="number" id="petrol-mileage" placeholder="Enter mileage of petrol scooter">
+
+            <label for="electricity-cost">Electricity Cost (per unit):</label>
+            <input type="number" id="electricity-cost" placeholder="Enter electricity cost per unit">
+
+            <label for="electric-consumption">Scootico Electricity Consumption (units/km):</label>
+            <input type="number" id="electric-consumption" placeholder="Enter electricity consumption per km">
+
+            <button onclick="calculateSavings()">Calculate Savings</button>
+
+            <div class="results" id="results"></div>
+        </div>
     </section>
+    <!-- Call to Action Section -->
+<section class="cta">
+    <h2>Ready to Ride?</h2>
+    <p>Join the green revolution and make Scootico your daily ride. Eco-friendly, efficient, and connected – 
+       Scootico has everything you need for a smarter, greener commute.</p>
+    <a href="mailto:sreejithsivan2003191@gmail.com?subject=Order%20Inquiry%20for%20Scootico&body=Hello%20Sreejith%2C%0A%0AI%20am%20interested%20in%20ordering%20the%20Scootico%20electric%20scooter.%20Please%20provide%20more%20details%20about%20the%20ordering%20process.%0A%0AThank%20you.%0A%0ARegards%2C%0A[Your%20Name]"
+       style="text-decoration: none;">
+        <button>Order Now</button>
+    </a>
+</section>
+
 
     <!-- Contact Section -->
     <section id="contact">
         <h2 class="section-title">Contact</h2>
-        <p>Contact: <strong>Sreejith S</strong></p>
-        <p>Email: sreejithsivan2003191@gmail.com</p>
-        <p>Feel free to reach out for more information or assistance with your order.</p>
-        
+        <p><strong>Sreejith S</strong> - <a href="mailto:sreejithsivan2003191@gmail.com">sreejithsivan2003191@gmail.com</a></p>
+        <p><strong>Akash Plakkal Sabu</strong> - <a href="mailto:akashplakkalsabu@gmail.com">akashplakkalsabu@gmail.com</a></p>
+        <p><strong>Silpa Nair</strong> - <a href="mailto:silpask13@gmail.com">silpask13@gmail.com</a></p>
+        <p><strong>Devika A Nair</strong> - <a href="mailto:devikasarovaram2003@gmail.com">devikasarovaram2003@gmail.com</a></p>
+        <p>Feel free to reach out to any of our team members for more information or assistance with your order.</p>
     </section>
 
     <!-- Footer -->
@@ -223,5 +281,41 @@
         <p>&copy; 2024 Scootico. All Rights Reserved.</p>
     </footer>
 
+    <script>
+        function calculateSavings() {
+            // Get input values
+            let distance = document.getElementById('distance').value;
+            let fuelCost = document.getElementById('fuel-cost').value;
+            let petrolMileage = document.getElementById('petrol-mileage').value;
+            let electricityCost = document.getElementById('electricity-cost').value;
+            let electricConsumption = document.getElementById('electric-consumption').value;
+
+            // Calculate costs
+            if (distance && fuelCost && petrolMileage && electricityCost && electricConsumption) {
+                // Petrol Scooter Daily Cost
+                let petrolDailyCost = (distance / petrolMileage) * fuelCost;
+                // Scootico Daily Cost
+                let scooticoDailyCost = distance * electricConsumption * electricityCost;
+
+                // Savings Calculation
+                let dailySavings = petrolDailyCost - scooticoDailyCost;
+                let monthlySavings = dailySavings * 30; // Assuming 30 days in a month
+                let annualSavings = dailySavings * 365; // Assuming 365 days in a year
+
+                // Show the result
+                document.getElementById('results').innerHTML = `
+                    <h3>Results:</h3>
+                    <p>Petrol Scooter Daily Cost: ₹${petrolDailyCost.toFixed(2)}</p>
+                    <p>Scootico Daily Cost: ₹${scooticoDailyCost.toFixed(2)}</p>
+                    <p><strong>Daily Savings: ₹${dailySavings.toFixed(2)}</strong></p>
+                    <p><strong>Monthly Savings: ₹${monthlySavings.toFixed(2)}</strong></p>
+                    <p><strong>Annual Savings: ₹${annualSavings.toFixed(2)}</strong></p>
+                `;
+            } else {
+                document.getElementById('results').innerHTML = '<p>Please fill in all fields.</p>';
+            }
+        }
+    </script>
 </body>
 </html>
+
